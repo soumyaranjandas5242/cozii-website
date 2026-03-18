@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Orders</title>
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+    <h1>Customer Orders</h1>
+
+    <div id="orders"></div>
+
+    <script>
+        async function loadOrders() {
+
+            let res = await fetch("http://localhost:3000/orders");
+
+            let orders = await res.json();
+
+            let html = "";
+
+            orders.forEach(order => {
+
+                html += `
+<div class="order">
+
+<p><b>Name:</b> ${order.first}</p>
+
+<p><b>Address:</b> ${order.address}</p>
+
+<p><b>Status:</b> ${order.status}</p>
+
+</div>
+`;
+
+            });
+
+            document.getElementById("orders").innerHTML = html;
+
+        }
+
+        loadOrders();
+    </script>
+
+</body>
+
+</html>

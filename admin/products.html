@@ -1,0 +1,81 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <title>Products</title>
+    <link rel="stylesheet" href="admin.css">
+
+</head>
+
+<body>
+
+    <h1>Add Product</h1>
+
+    <input id="name" placeholder="Product Name">
+
+    <input id="price" placeholder="Price">
+
+    <input id="image" placeholder="Image URL">
+
+    <button onclick="addProduct()">Add Product</button>
+    <h2>Update Product</h2>
+
+    <input id="productId" placeholder="Product ID">
+
+    <input id="newName" placeholder="New Name">
+
+    <input id="newPrice" placeholder="New Price">
+
+    <button onclick="updateProduct()">Update Product</button>
+    <script>
+        async function addProduct() {
+
+            let product = {
+
+                name: document.getElementById("name").value,
+                price: document.getElementById("price").value,
+                image: document.getElementById("image").value
+
+            };
+
+            await fetch("http://localhost:3000/product", {
+
+                method: "POST",
+
+                headers: {
+                    "Content-Type": "application/json"
+                },
+
+                body: JSON.stringify(product)
+
+            });
+
+            alert("Product added");
+
+        }
+        async function updateProduct() {
+
+            let id = document.getElementById("productId").value;
+
+            let data = {
+                name: document.getElementById("newName").value,
+                price: document.getElementById("newPrice").value
+            };
+
+            await fetch("http://localhost:3000/product/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            alert("Product updated");
+
+        }
+    </script>
+
+</body>
+
+</html>
