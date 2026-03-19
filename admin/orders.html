@@ -1,0 +1,62 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Orders</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+
+<body>
+
+<h1>Customer Orders</h1>
+
+<div id="orders"></div>
+
+<script>
+async function loadOrders() {
+
+    let res = await fetch("http://localhost:3000/orders");
+    let orders = await res.json();
+
+    let html = "";
+
+    if (orders.length === 0) {
+        html = "<p>No orders found</p>";
+    }
+
+    orders.forEach(order => {
+
+        let products = "";
+
+        if (order.products) {
+            order.products.forEach(p => {
+                products += p.product_name + " (Qty: " + p.qty + ")<br>";
+            });
+        }
+
+        html += `
+<div class="order">
+
+<p><b>Name:</b> ${order.customer_name}</p>
+<p><b>Email:</b> ${order.email}</p>
+<p><b>Mobile:</b> ${order.mobile}</p>
+<p><b>Address:</b> ${order.address}</p>
+<p><b>State:</b> ${order.state}</p>
+<p><b>Total:</b> ₹${order.total_amount}</p>
+
+<p><b>Products:</b><br>${products}</p>
+
+</div>
+<hr>
+`;
+    });
+
+    document.getElementById("orders").innerHTML = html;
+}
+
+loadOrders();
+</script>
+
+</body>
+
+</html>

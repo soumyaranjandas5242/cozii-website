@@ -1,0 +1,39 @@
+body {
+    font-family: Arial;
+    background: #f2f2f2;
+    text-align: center;
+}
+
+.login-box {
+    width: 300px;
+    background: white;
+    padding: 30px;
+    margin: 100px auto;
+    border-radius: 8px;
+}
+
+input {
+    width: 100%;
+    padding: 10px;
+    margin: 10px 0;
+}
+
+button {
+    background: black;
+    color: white;
+    padding: 10px;
+    border: none;
+    cursor: pointer;
+}
+
+.menu a {
+    display: block;
+    margin: 20px;
+    font-size: 20px;
+}
+
+.order {
+    background: white;
+    padding: 20px;
+    margin: 20px;
+}

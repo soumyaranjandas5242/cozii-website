@@ -1,0 +1,489 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title>COZII BOUQUET</title>
+
+    <link rel="stylesheet" href="style.css">
+
+    <!-- Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.5.0/css/all.min.css">
+
+</head>
+
+<body>
+
+    <header class="header">
+        <!-- MENU ICON -->
+        <div class="menu-icon" onclick="openMenu()">
+            <i class="fas fa-bars"></i>
+        </div>
+        <div class="logout-icon" onclick="logoutUser()">
+            <i class="fas fa-sign-out-alt"></i>
+        </div>
+        <!-- Website Name -->
+
+        <div class=" logo ">
+            COZII BOUQUET
+        </div>
+
+        <!-- Right Icons -->
+        <div class="icons">
+            <a href="#" onclick="openSearch()"><i class="fas fa-search"></i></a>
+            <a href="#" onclick="openLogin()"><i class="fas fa-user"></i></a>
+            <a href="#" onclick="openWishlist()" class="wishlist-header-icon">
+                <i class="fas fa-heart"></i>
+                <span id="wishlistCount">0</span>
+            </a>
+            <a href="#" onclick="openCart()" class="cart-icon">
+                <i class="fas fa-shopping-cart"></i>
+                <span id="cartCount">0</span>
+            </a>
+        </div>
+    </header>
+    <!-- SIDE MENU -->
+    <div id="sideMenu" class="side-menu">
+
+        <div class="menu-header">
+
+            <h2>COZII BOUQUET</h2>
+
+            <span class="close-menu" onclick="closeMenu()">✖</span>
+
+        </div>
+
+        <div class="menu-content">
+
+            <ul>
+
+                <li><a href="earrings.html">• EARRINGS</a></li>
+
+                <li><a href="neckpieces.html">• NECKPIECES</a></li>
+
+                <li><a href="bracelets.html">• BRACELETS</a></li>
+
+                <li><a href="jewellery set.html">• JEWELLERY SET</a></li>
+
+                <li><a href="bangles.html">• BANGLES</a></li>
+
+                <li><a href="rings.html">• RINGS</a></li>
+
+                <li><a href="snapclips.html">• SNAPCLIPS</a></li>
+
+                <li><a href="clawclips.html">• CLAWCLIPS</a></li>
+
+                <li><a href="scrunchies.html">• SCRUNCHIES</a></li>
+
+                <li><a href="customisebouquet.html">• CUSTOMIZE BOUQUET</a></li>
+
+            </ul>
+
+        </div>
+
+    </div>
+    <div id="cartPage" class="cart-page">
+
+        <div class="cart-header">
+            <h2>Your Cart🛒</h2>
+            <span class="close-cart" onclick="closeCart()">✖</span>
+        </div>
+
+        <div id="cartContent" class="cart-content">
+
+            <p class="empty-cart">Your Cart is empty!</p>
+
+            <div class="explore-box">
+                <button onclick="exploreProducts()">Explore Products</button>
+            </div>
+            <button onclick="order()">Order</button>
+        </div>
+    </div>
+    <!-- ORDER PAGE -->
+    <div id="orderPage" class="cart-page">
+
+        <div class="cart-header">
+            <h2>Order Summary</h2>
+            <span class="close-cart" onclick="closeOrder()">✖</span>
+        </div>
+        <div class="cart-content">
+            <h3>Shipping Address</h3>
+
+            <input type="text" id="firstName" placeholder="First Name">
+
+            <input type="text" id="lastName" placeholder="Last Name">
+
+            <input type="email" id="emailAddress" placeholder="Email Address">
+
+            <input type="text" id="mobileNumber" placeholder="Mobile Number">
+
+            <input type="text" id="pinCode" placeholder="PIN Code">
+
+            <textarea id="fullAddress" placeholder="Full Address (At, Post, Via, District)"></textarea>
+
+            <select id="state">
+
+<option>Select State</option>
+
+<option>Odisha</option>
+<option>Maharashtra</option>
+<option>Delhi</option>
+<option>Karnataka</option>
+<option>Tamil Nadu</option>
+<option>West Bengal</option>
+<option>Gujarat</option>
+<option>Rajasthan</option>
+<option>Uttar Pradesh</option>
+<option>Madhya Pradesh</option>
+<option>Bihar</option>
+<option>Punjab</option>
+<option>Haryana</option>
+<option>Assam</option>
+</select>
+            <button id="submitBtn" onclick="submitAddress()">Submit Address</button>
+
+            <button id="changeBtn" onclick="changeAddress()" style="display:none;">Change Address</button>
+            <div id="continuePayment" style="display:none;">
+                <button onclick="openPayment()">Continue</button>
+            </div>
+
+        </div>
+    </div>
+    <!-- PAYMENT PAGE -->
+
+    <div id="paymentPage" class="cart-page">
+
+        <div class="cart-header">
+            <h2>Payment</h2>
+            <span class="close-cart" onclick="closePayment()">✖</span>
+        </div>
+
+        <div class="cart-content">
+
+            <h3>Total Amount</h3>
+
+            <h2 id="paymentTotal">₹0</h2>
+
+            <p>Payment Method: UPI Only</p>
+            <p>After clicking Pay Now your order will be confirmed.</p>
+            <button onclick="completePayment()">Pay Now</button>
+        </div>
+    </div>
+    <!-- ORDER SUCCESS -->
+
+    <div id="successPage" class="cart-page">
+
+        <div class="cart-content">
+
+            <h1>🎉 Order Successful 🎉</h1>
+
+            <p>Your order has been placed successfully.</p>
+
+            <div class="flowers">
+                🌸 🌼 🌺 🌻 🌷
+            </div>
+
+            <button onclick="continueShopping()">Continue Shopping</button>
+
+        </div>
+    </div>
+    <div id="wishlistPage" class="wishlist-page">
+        <div class="wishlist-header">
+            <h2>Your Wishlist♥️</h2>
+            <span class="close-wishlist" onclick="closeWishlist()">✖</span>
+
+        </div>
+
+        <div id="wishlistContent" class="wishlist-content">
+
+            <p id="emptyMessage">Your Wishlist is empty</p>
+
+        </div>
+
+    </div>
+    <div id="searchBox" class="search-box">
+
+        <span class="close-search" onclick="closeSearch()">✖</span>
+
+        <div class="search-container"><input type="text" id="searchInput" placeholder="Search Earrings, Jewellery Set, Neckpieces, Bracelets,Scrunchies,Snap Clips,Claw Clips,Bangle,Rings..." onkeyup="showSuggestions()">
+
+            <button class="search-btn">
+<i class="fas fa-search"></i>
+</button>
+        </div>
+        <div id="suggestions"></div>
+    </div>
+    <!-- SIGN IN POPUP -->
+    <div id="loginPopup" class="popup">
+
+        <div class="popup-content">
+
+            <div class="popup-header">
+
+
+
+                <h2>
+                    WELCOME TO <br>
+                    <b>COZII BOUQUET</b>
+                </h2>
+                <span class="close" onclick="closeLogin()">✖</span>
+
+            </div>
+
+            <p class="explore">Explore COZII BOUQUET</p>
+            <p class="tagline">Affordable luxury made for everyday</p>
+            <h2 id="formTitle">Sign In</h2>
+
+            <input type="email" id="username" placeholder="Enter Email">
+
+            <input type="password" id="password" placeholder="Enter Password">
+
+            <button onclick="loginUser()">Sign In</button>
+
+            <p>
+                Don't have an account?
+                <a href="#" onclick="showSignup()">Sign Up</a>
+            </p>
+
+        </div>
+
+    </div>
+
+    <!-- SIGNUP POPUP -->
+
+    <div id="signupPopup" class="popup">
+
+        <div class="popup-content">
+
+            <span class="close" onclick="closeSignup()">✖</span>
+
+            <h2>Create Account</h2>
+
+            <input type="email" id="newUsername" placeholder=" Enter Email">
+
+            <input type="password" id="newPassword" placeholder="Create Password">
+
+            <button onclick="signupUser()">Sign Up</button>
+
+            <p>
+                Already have account?
+                <a href="#" onclick="showLogin()">Sign In</a>
+            </p>
+
+        </div>
+
+    </div>
+    <section class="banner-slider">
+
+        <img class="slide" src="images/banner1.JPEG">
+        <img class="slide" src="images/banner2.JPEG">
+        <img class="slide" src="images/banner3.JPEG">
+        <img class="slide" src="images/banner4.JPEG">
+    </section>
+    <div class="brand-ticker">
+        <div class="ticker-text">
+            COZII BOUQUET • COZII BOUQUET • COZII BOUQUET • COZII BOUQUET • COZII BOUQUET •
+        </div>
+    </div>
+    <section class="categories">
+        <div class="category">
+            <a href="earrings.html">
+                <img src="images/earrings.JPEG">
+                <p>EARRINGS</p>
+            </a>
+        </div>
+
+        <div class="category">
+            <a href="neckpieces.html">
+                <img src="images/neckpieces.JPEG">
+                <p>NECKPIECES</p>
+            </a>
+        </div>
+
+        <div class="category">
+            <a href="bracelets.html">
+                <img src="images/bracelets.JPEG">
+                <p>BRACELETS</p>
+            </a>
+        </div>
+
+        <div class="category">
+            <a href="jewellery set.html">
+                <img src="images/jewellery set.JPEG">
+                <p>JEWELERY SET</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="bangles.html">
+                <img src="images/bangles.JPEG">
+                <p>BANGLES</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="rings.html">
+                <img src="images/rings.JPEG">
+                <p>RINGS</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="snapclips.html">
+                <img src="images/snapclips.JPEG">
+                <p>SNAP CLIPS</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="clawclips.html">
+                <img src="images/clawclips.JPEG">
+                <p>CLAWCLIPS</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="scrunchies.html">
+                <img src="images/scrunchies.JPEG">
+                <p>SCRUNCHIES</p>
+            </a>
+        </div>
+        <div class="category">
+            <a href="customisebouquet.html">
+                <img src="images/customisebouquet.JPEG">
+                <p>CUSTOMISE BOUQUET</p>
+            </a>
+        </div>
+
+    </section>
+    <section class="home ">
+    </section>
+    <!-- FIREBASE -->
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-app-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-auth-compat.js"></script>
+    <script src="https://www.gstatic.com/firebasejs/9.23.0/firebase-analytics-compat.js"></script>
+
+    <script>
+        const firebaseConfig = {
+            apiKey: "AIzaSyA2tzSBy4kLS1eKRejG28adx3aNJ99s1l4",
+            authDomain: "firebaseacozii-bouquet-65054.pp.com",
+            projectId: "cozii-bouquet-65054",
+            storageBucket: "cozii-bouquet-65054.firebasestorage.app",
+            messagingSenderId: "964880169833",
+            appId: "1:964880169833:web:fceab82a3a98ee488d5bf8",
+            measurementId: "G-GJLGTVEJBT"
+
+        };
+
+        firebase.initializeApp(firebaseConfig);
+        firebase.analytics();
+
+        const auth = firebase.auth();
+        let currentUser = null;
+
+        auth.onAuthStateChanged(function(user) {
+
+            if (user) {
+
+                currentUser = user;
+                console.log("User logged in:", user.email);
+
+            } else {
+
+                currentUser = null;
+                console.log("User logged out");
+
+            }
+
+        });
+
+
+        /* SIGNUP */
+
+        function signupUser() {
+
+            const email = document.getElementById("newUsername").value;
+            const password = document.getElementById("newPassword").value;
+
+            auth.createUserWithEmailAndPassword(email, password)
+                .then(() => {
+
+                    alert("Account Created Successfully ❤️");
+
+                    document.getElementById("signupPopup").style.display = "none";
+
+                })
+                .catch((error) => {
+
+                    alert(error.message);
+
+                });
+        }
+
+        /* LOGIN */
+
+        function loginUser() {
+
+            const email = document.getElementById("username").value;
+            const password = document.getElementById("password").value;
+
+            auth.signInWithEmailAndPassword(email, password)
+                .then(() => {
+
+                    alert("Login Successful 🎉");
+
+                    document.getElementById("loginPopup").style.display = "none";
+
+                })
+                .catch((error) => {
+
+                    alert(error.message);
+
+                });
+
+        }
+    </script>
+    <footer class="footer">
+
+        <div class="footer-container">
+
+            <div class="footer-about">
+                <h2>COZII BOUQUET</h2>
+
+                <p>
+                    COZII BOUQUET is a girls accessories brand offering cute aesthetic Pinterest-vibe jewellery and accessories. Our collection includes anti-tarnish jewellery like neckpieces, jewellery sets, earrings, rings and bangles. We also have claw clips, snap clips
+                    and scrunchies. You can customise a special bouquet for her — for your mom, girlfriend, sister or the most special woman in your life. Shipping all over India.
+                </p>
+
+            </div>
+
+            <div class="footer-social">
+
+                <a href="https://wa.me/919692714998" target="_blank">
+                    <i class="fab fa-whatsapp"></i>
+                </a>
+
+                <a href="https://instagram.com/coziibouquet" target="_blank">
+                    <i class="fab fa-instagram"></i>
+                </a>
+                <a href="https://www.facebook.com/share/18TiTMULk6/" target="_blank">
+                    <i class="fab fa-facebook"></i>
+                </a>
+
+                <a href="mailto:coziibouquet@gmail.com">
+                    <i class="fas fa-envelope"></i>
+                </a>
+
+            </div>
+
+            <h3 class="footer-thanks">THANK YOU FOR VISITING US ❤️</h3>
+
+            <p class="footer-copy">
+                © 2026 COZII BOUQUET • All Rights Reserved
+            </p>
+
+        </div>
+
+    </footer>
+    <script src="script.js" defer></script>
+</body>
+
+</html>

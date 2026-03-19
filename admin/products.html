@@ -1,0 +1,96 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Products</title>
+    <link rel="stylesheet" href="admin.css">
+</head>
+<body>
+
+    <h1>Add Product</h1>
+
+    <input id="name" placeholder="Product Name">
+    <input id="price" placeholder="Price">
+    <input id="image" placeholder="Image URL">
+    <button onclick="addProduct()">Add Product</button>
+
+    <h2>Update Product</h2>
+
+    <input id="productId" placeholder="Product ID">
+    <input id="newName" placeholder="New Name">
+    <input id="newPrice" placeholder="New Price">
+    <button onclick="updateProduct()">Update Product</button>
+
+    <h2>All Products</h2>
+    <div id="productList"></div>
+
+    <script>
+        async function addProduct() {
+            let product = {
+                name: document.getElementById("name").value,
+                price: Number(document.getElementById("price").value),
+                image: document.getElementById("image").value
+            };
+
+            let res = await fetch("http://localhost:3000/product", {
+                method: "POST",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(product)
+            });
+
+            let msg = await res.text();
+            alert(msg);
+            loadProducts();
+        }
+
+        async function updateProduct() {
+            let id = document.getElementById("productId").value;
+
+            let data = {
+                name: document.getElementById("newName").value,
+                price: Number(document.getElementById("newPrice").value)
+            };
+
+            let res = await fetch("http://localhost:3000/product/" + id, {
+                method: "PUT",
+                headers: {
+                    "Content-Type": "application/json"
+                },
+                body: JSON.stringify(data)
+            });
+
+            let msg = await res.text();
+            alert(msg);
+            loadProducts();
+        }
+
+        async function loadProducts() {
+            let res = await fetch("http://localhost:3000/products");
+            let products = await res.json();
+
+            let html = "";
+
+            if (products.length === 0) {
+                html = "<p>No products found</p>";
+            } else {
+                products.forEach(product => {
+                    html += `
+                        <div class="order">
+                            <p><b>ID:</b> ${product.id}</p>
+                            <p><b>Name:</b> ${product.name}</p>
+                            <p><b>Price:</b> ₹${product.price}</p>
+                            <p><b>Image:</b> ${product.image}</p>
+                        </div>
+                    `;
+                });
+            }
+
+            document.getElementById("productList").innerHTML = html;
+        }
+
+        loadProducts();
+    </script>
+
+</body>
+</html>
