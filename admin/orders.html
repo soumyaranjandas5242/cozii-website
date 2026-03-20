@@ -15,7 +15,7 @@
 <script>
 async function loadOrders() {
 
-    let res = await fetch("http://localhost:3000/orders");
+    let res = await fetch("https://cozii-backend.onrender.com/orders");
     let orders = await res.json();
 
     let html = "";
