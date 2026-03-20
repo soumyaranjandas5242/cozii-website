@@ -1,12 +1,11 @@
 {
+  "name": "cozii-website",
+  "version": "1.0.0",
+  "main": "server.js",
   "dependencies": {
-    "cors": "^2.8.6",
+    "cors": "^2.8.5",
+    "dotenv": "^16.6.1",
     "express": "^5.2.1",
-<<<<<<< HEAD
-    "mongoose": "^9.3.0",
-    "mysql2": "^3.20.0"
-=======
-    "mongoose": "^9.3.0"
->>>>>>> 94232dc0a9653cbc691156fb9a416705f715b901
+    "mysql2": "^3.0.0"
   }
 }
