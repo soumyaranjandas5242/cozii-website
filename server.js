@@ -21,9 +21,42 @@ const db = mysql.createConnection({
 
 db.connect((err) => {
     if (err) {
-        console.log("MySQL connection error:", err);
+        console.error("MySQL connection error:", err);
     } else {
         console.log("MySQL connected");
+
+        // CREATE TABLES AUTOMATICALLY
+
+        db.query(`CREATE TABLE IF NOT EXISTS products (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            name VARCHAR(200),
+            price DECIMAL(10,2),
+            image TEXT,
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )`);
+
+        db.query(`CREATE TABLE IF NOT EXISTS orders (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            customer_name VARCHAR(100),
+            email VARCHAR(100),
+            mobile VARCHAR(20),
+            address TEXT,
+            state VARCHAR(50),
+            total_amount DECIMAL(10,2),
+            created_at TIMESTAMP DEFAULT CURRENT_TIMESTAMP
+        )`);
+
+        db.query(`CREATE TABLE IF NOT EXISTS order_items (
+            id INT AUTO_INCREMENT PRIMARY KEY,
+            order_id INT,
+            product_name VARCHAR(200),
+            price VARCHAR(20),
+            qty INT,
+            image TEXT,
+            FOREIGN KEY (order_id) REFERENCES orders(id) ON DELETE CASCADE
+        )`);
+
+        console.log("Tables checked/created");
     }
 });
 
