@@ -1,62 +1,58 @@
 <!DOCTYPE html>
 <html>
-
 <head>
     <title>Orders</title>
     <link rel="stylesheet" href="admin.css">
 </head>
-
 <body>
 
 <h1>Customer Orders</h1>
-
 <div id="orders"></div>
 
 <script>
 async function loadOrders() {
+    try {
+        let res = await fetch("https://cozii-backend.onrender.com/orders");
+        let orders = await res.json();
 
-    let res = await fetch("https://cozii-backend.onrender.com/orders");
-    let orders = await res.json();
+        let html = "";
 
-    let html = "";
-
-    if (orders.length === 0) {
-        html = "<p>No orders found</p>";
-    }
-
-    orders.forEach(order => {
-
-        let products = "";
-
-        if (order.products) {
-            order.products.forEach(p => {
-                products += p.product_name + " (Qty: " + p.qty + ")<br>";
-            });
+        if (orders.length === 0) {
+            html = "<div class='order'><p>No orders found</p></div>";
         }
 
-        html += `
-<div class="order">
+        orders.forEach(order => {
+            let products = "";
 
-<p><b>Name:</b> ${order.customer_name}</p>
-<p><b>Email:</b> ${order.email}</p>
-<p><b>Mobile:</b> ${order.mobile}</p>
-<p><b>Address:</b> ${order.address}</p>
-<p><b>State:</b> ${order.state}</p>
-<p><b>Total:</b> ₹${order.total_amount}</p>
+            if (order.products) {
+                order.products.forEach(p => {
+                    products += `${p.product_name} (Qty: ${p.qty})<br>`;
+                });
+            }
 
-<p><b>Products:</b><br>${products}</p>
+            html += `
+            <div class="order">
+                <p><b>Name:</b> ${order.customer_name}</p>
+                <p><b>Email:</b> ${order.email}</p>
+                <p><b>Mobile:</b> ${order.mobile}</p>
+                <p><b>Address:</b> ${order.address}</p>
+                <p><b>State:</b> ${order.state}</p>
+                <p><b>Total:</b> ₹${order.total_amount}</p>
+                <p><b>Products:</b><br>${products}</p>
+            </div>
+            `;
+        });
 
-</div>
-<hr>
-`;
-    });
-
-    document.getElementById("orders").innerHTML = html;
+        document.getElementById("orders").innerHTML = html;
+    } catch (error) {
+        document.getElementById("orders").innerHTML =
+            "<div class='order'><p>Failed to load orders</p></div>";
+        console.log(error);
+    }
 }
 
 loadOrders();
 </script>
 
 </body>
-
 </html>

@@ -615,7 +615,7 @@ function completePayment() {
         totalAmount: total
     };
 
-    fetch("http://localhost:3000/order", {
+    fetch("http:https://cozii-backend.onrender.com", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -699,7 +699,7 @@ function logoutUser() {
 }
 
 function sendOrder() {
-    fetch("http://localhost:3000/order", {
+    fetch("https://cozii-backend.onrender.com", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
